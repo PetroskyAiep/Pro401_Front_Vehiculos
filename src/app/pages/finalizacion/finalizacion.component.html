@@ -1,0 +1,54 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Finalizacion de la encuesta
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card class="ion-padding">
+    <ion-card-header>
+      <ion-card-title>Finalizacion</ion-card-title>
+    </ion-card-header>
+
+    <div>
+      <p>Gracias por responder la encuesta de movilidad</p>
+    
+      <br>
+    
+      <p>Enviaremos a tu correo un codigo QR con un regalo de agradecimiento, en caso de no haberlo recibido puedes solicitar 
+        que que se reenvie el correo con el codigo QR
+      </p>
+    </div>
+    
+    <br>
+    
+    <form>
+      <ion-button
+        type="submit" 
+        expand="block">Reenviar Correo</ion-button>
+    
+        <br>
+    
+        <ion-button
+        type="submit" 
+        expand="block">Lector QR</ion-button>
+    
+        <br>
+
+        <div class="container">
+          <div class="logos">
+            <ion-icon (click)="invocarPost()" name="logo-instagram">Instagram</ion-icon>
+            <a href="http://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fencuestamovilidad.cl%2Fdocs%2Fplugins%2F&amp%3Bsrc=sdkpreparse" target="_blank"><ion-icon name="logo-facebook">Facebook</ion-icon></a>
+            <ion-icon (click)="invocarPost()" name="logo-twitter"></ion-icon>
+            <a href="https://api.whatsapp.com/send?text=encuestaMovilidad" target="_blank" ><ion-icon name="logo-whatsapp">Whatsapp</ion-icon></a>
+          </div>
+
+        </div>
+
+    </form>
+
+  </ion-card>
+
+</ion-content>

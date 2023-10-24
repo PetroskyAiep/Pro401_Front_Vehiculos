@@ -12,50 +12,57 @@
       <ion-card-title>Preguntas</ion-card-title>
     </ion-card-header>
 
-      <form>
+    <form [formGroup] ="encuestaForm" (submit)="submitForm()">
 
         <ion-list>
           <ion-item>
-            <ion-select [(ngmodel)]="test1" aria-label="" placeholder="Medio de Transporte" [multiple]="false">
-              <ion-select-option value="publico">Publico</ion-select-option>
-              <ion-select-option value="privado">Privado</ion-select-option>
+            <ion-select
+             aria-label="Publico / Privado" 
+             placeholder="Publico / Privado" 
+             (ionChange)="handleChange($event)" 
+             formControlName="Publico_Privado"
+             fill="outline">
+             <ion-select-option value="publico">Publico</ion-select-option>
+             <ion-select-option value="privadoSinCompartir">Privado Sin Compartir</ion-select-option>
+             <ion-select-option value="privadoCompartido">Privado Compartido</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-list>
-        <br>
-        <ion-list>
-          <ion-item>
-            <ion-select aria-label="" placeholder="Publico" [multiple]="true">
-              <ion-select-option value="metro">Metro</ion-select-option>
-              <ion-select-option value="micro">Micro</ion-select-option>
-              <ion-select-option value="bus">Bus</ion-select-option>
-              <ion-select-option value="taxi">Taxi</ion-select-option>
-              <ion-select-option value="uber">Uber</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-list>
-        <br>
-        <ion-list>
-          <ion-item>
-            <ion-select [disabled]="test1 == 'publico'" aria-label="" placeholder="Privado" [multiple]="false">
-              <ion-select-option value="auto">Auto</ion-select-option>
-              <ion-select-option value="moto">Moto</ion-select-option>
-              <ion-select-option value="otro">Otro</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-list>
-        <br>
-        <ion-list>
-          <ion-item>
-            <ion-select aria-label="" placeholder="KM Recorridos" [multiple]="true">
-              <ion-select-option value="text">KM</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-list>
-        <br>
-        <ion-button expand="block">Enviar</ion-button>
 
         <br>
+
+        <ion-list>
+          <ion-item>
+            <ion-select
+			      aria-label="Medio de Transporte" 
+			      placeholder="Medio de Transporte" 
+            formControlName="MedioTransporte"
+			      fill="outline">
+            <ion-select-option *ngFor="let valor of listaTransportes">{{valor}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+
+        <br>
+        <ion-input 
+        label="KM"
+        type="number"
+        label-placement="floating" 
+        fill="outline"
+        placeholder="0">
+        formControlName="KM"
+        </ion-input>
+
+        <br>
+
+        <ion-button type="submit" expand="block">Enviar</ion-button>
+
+        <br>
+
+        <ion-button
+        (click)="backToLogin()" 
+        expand="block">VOLVER</ion-button>
+
         <P>En caso de dudas contactar al 22-777 77 77</P>
 
       </form>

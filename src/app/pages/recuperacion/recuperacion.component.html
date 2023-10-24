@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Recuperacion de Contraseña
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card class="ion-padding">
+    <ion-card-header>
+      <ion-card-title>Recupera tu Contraseña</ion-card-title>
+    </ion-card-header>
+
+    <form>
+
+      <ion-input 
+          label="Email"
+          type="email"
+          label-placement="floating" 
+          fill="outline" 
+          formControlName="email"
+          errorText="Email es requerido y debe ser valido"
+          placeholder="Ingrese su Email">
+      </ion-input>
+
+      <br>
+      
+      <ion-button
+        type="submit" 
+        expand="block">Enviar Codigo de Recuperacion</ion-button>
+
+    </form>

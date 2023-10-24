@@ -13,8 +13,7 @@ export class AccountService {
   constructor(private http : HttpClient, private router : Router) { }
 
   register(userCredentials : any){
-
-      this.http.post(`${URL}/api/account/register`, userCredentials).subscribe({
+      this.http.post(`${URL}/api/Account/Register`, userCredentials).subscribe({
         next : resp => {
           console.log(resp);
         },
@@ -42,11 +41,13 @@ export class AccountService {
     this.http.get(`${URL}/api/account/user`,{headers}).subscribe({
       next: (resp : any)=>{
         if(!resp.ok){
+          return resp;
           this.router.navigate(["/"]);
         }
 
       },
       error: err =>{
+        return err;
         this.router.navigate(["/"]);
       }
     })
