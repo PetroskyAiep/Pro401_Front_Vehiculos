@@ -8,6 +8,7 @@ import { EncuestaComponent } from './encuesta/encuesta.component';
 import { RecuperacionComponent } from './recuperacion/recuperacion.component';
 import { FinalizacionComponent } from './finalizacion/finalizacion.component';
 import { LectorqrComponent } from './lectorqr/lectorqr.component';
+import { LectorQrModalComponent } from './lectorqr/lectorqrModal.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { LectorqrComponent } from './lectorqr/lectorqr.component';
     EncuestaComponent,
     RecuperacionComponent,
     FinalizacionComponent,
-    LectorqrComponent
+    LectorqrComponent,
+    LectorQrModalComponent
   ],
   imports: [
     IonicModule,

@@ -7,6 +7,7 @@ import { EncuestaComponent } from './pages/encuesta/encuesta.component';
 import { RecuperacionComponent } from './pages/recuperacion/recuperacion.component';
 import { FinalizacionComponent } from './pages/finalizacion/finalizacion.component';
 import { LectorqrComponent } from './pages/lectorqr/lectorqr.component';
+import { LectorQrModalComponent } from './pages/lectorqr/lectorqrModal.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
     path:'lectorqr',
     component : LectorqrComponent
 
+  },
+  {
+    path: 'lectorqrModal',
+    component: LectorQrModalComponent,
   },
   {
     path:'recuperacion',
