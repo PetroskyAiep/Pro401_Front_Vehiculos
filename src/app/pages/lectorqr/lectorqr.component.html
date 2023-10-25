@@ -1,39 +1,9 @@
-<!-- <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Lector QR
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-card class="ion-padding">
-    <ion-card-header>
-      <ion-card-title>Leer QR</ion-card-title>
-    </ion-card-header>
-    
-    <img class="logo" src="assets/img/1.png" alt="QR">
-
-    <br>
-
-    <ion-button class="boton" 
-    type="submit" 
-    expand="block">Escanear</ion-button>
-
-    <p>Felicitaciones </p>
-          
-  </ion-card>
-
-</ion-content>
-
- -->
- 
- <ion-header>
+<ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
-    Barcode Scanning
+    Scanner
   </ion-toolbar>
 </ion-header>
 
@@ -49,7 +19,7 @@
     <ion-card-content>
       <form [formGroup]="formGroup">
         <ion-item>
-          <ion-label position="fixed">Formats</ion-label>
+          <ion-label position="fixed">Formato</ion-label>
           <ion-select
             multiple="true"
             placeholder="Formats"
@@ -104,7 +74,7 @@
                 <ion-input type="text" readonly [value]="barcode.format"></ion-input>
               </ion-item>
               <ion-item>
-                <ion-label position="fixed">Raw Value</ion-label>
+                <ion-label position="fixed">Valor en bruto</ion-label>
                 <ion-input
                   type="text"
                   readonly
@@ -112,7 +82,7 @@
                 ></ion-input>
               </ion-item>
               <ion-item>
-                <ion-label position="fixed">Value Type</ion-label>
+                <ion-label position="fixed">Tipo Valor</ion-label>
                 <ion-input
                   type="text"
                   readonly
@@ -127,16 +97,13 @@
           expand="block"
           (click)="startScan()"
           [disabled]="!isSupported"
-          >Start Scan</ion-button
+          >Escanear</ion-button
         >
         <ion-button
           expand="block"
           (click)="readBarcodeFromImage()"
           [disabled]="!isSupported"
-          >Read Barcode From Image</ion-button
-        >
-        <ion-button expand="block" (click)="scan()" [disabled]="!isSupported"
-          >Scan</ion-button
+          >Leer QR desde imagen</ion-button
         >
       </form>
     </ion-card-content>

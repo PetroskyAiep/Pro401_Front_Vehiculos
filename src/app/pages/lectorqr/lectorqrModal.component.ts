@@ -51,6 +51,8 @@ import {
         --background: transparent;
       }
 
+      /* background-image: url(img/qr.png) */
+
       .square {
         position: absolute;
         left: 50%;
