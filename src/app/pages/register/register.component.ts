@@ -44,7 +44,7 @@ export class RegisterComponent  implements OnInit {
     Run : new FormControl('', [Validators.required, Validators.pattern('^[0-9]+-[0-9kK]{1}$')]),
     Nombres : new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]),
     Apellidos : new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]),
-    FechaNacimiento : new FormControl('', [Validators.required, Validators.min(2415021), Validators.max((this.currentDate.getTime() - 1727633))]),
+    FechaNacimiento : new FormControl('', [Validators.required/*Validators.min( aui va la fecha minima), Validators.max((Aqui va la fecha maxima))*/]),
     TipoTrabajoId : new FormControl('', [Validators.required, Validators.pattern('^[0-9]*$')]),
     ComunaTrabajoId : new FormControl('', [Validators.required, Validators.pattern('^[0-9]*$')]),
     ComunaResidenciaId : new FormControl('', [Validators.required, Validators.pattern('^[0-9]*$')]),
