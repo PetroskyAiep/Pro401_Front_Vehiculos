@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { min } from 'rxjs';
 import { AccountService } from 'src/app/services/account.service';
 import { EncuestaService } from 'src/app/services/encuesta.service';
 import { environment } from 'src/environments/environment';
@@ -24,7 +23,7 @@ export function validarEdad(dateKey : string) : ValidatorFn{
     const currentDate = new Date();
     const currentDateInt = Date.parse(currentDate.toString());
     const edad = currentDateInt - fecha;
-    return currentDateInt > fecha && maxEdad > edad ? null : {edadInvalida : true};
+    return minEdad < edad && maxEdad > edad ? null : {edadInvalida : true};
   }
 }
 
@@ -93,10 +92,14 @@ export class RegisterComponent  implements OnInit {
     this.registroDTO.TipoTrabajoId = Number(this.registerForm.value.TipoTrabajoId);
     this.registroDTO.ComunaTrabajoId = Number(this.registerForm.value.ComunaTrabajoId);
     this.registroDTO.ComunaResidenciaId = Number(this.registerForm.value.ComunaResidenciaId);
-  /*   if(this.FechaNacimiento < minAge){
-      this.registroDTO.ComunaTrabajoId = 0;
-    } */
-    this.registroDTO.EstadoRegistroId = 1;
+    if(this.registerForm.value.TipoTrabajoId = 3)
+    {
+      this.registroDTO.EstadoRegistroId = 2;
+    }
+    else
+    {
+      this.registroDTO.EstadoRegistroId = 1;
+    }
     console.log(this.registroDTO);
     this.accountService.register(this.registroDTO);
     this.router.navigate(["/"]);
