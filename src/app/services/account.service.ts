@@ -42,13 +42,13 @@ export class AccountService {
       next: (resp : any)=>{
         if(!resp.ok){
           return resp;
-          this.router.navigate(["/"]);
+          //this.router.navigate(["/"]);
         }
 
       },
       error: err =>{
         return err;
-        this.router.navigate(["/"]);
+        //this.router.navigate(["/"]);
       }
     })
   }

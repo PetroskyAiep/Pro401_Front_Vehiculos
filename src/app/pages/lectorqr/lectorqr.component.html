@@ -97,14 +97,17 @@
           expand="block"
           (click)="startScan()"
           [disabled]="!isSupported"
-          >Escanear</ion-button
-        >
+        >Escanear</ion-button>
         <ion-button
           expand="block"
           (click)="readBarcodeFromImage()"
           [disabled]="!isSupported"
-          >Leer QR desde imagen</ion-button
-        >
+        >Leer QR desde imagen
+        </ion-button>
+        <ion-button
+          expand="block"
+          (click)="backToLogin()"
+        >Volver</ion-button>
       </form>
     </ion-card-content>
   </ion-card>

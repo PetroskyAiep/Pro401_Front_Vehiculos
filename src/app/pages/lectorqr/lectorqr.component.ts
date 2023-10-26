@@ -1,4 +1,5 @@
 import { Component, NgZone, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { DialogService } from '@app/core';
 import {
@@ -30,7 +31,8 @@ export class LectorqrComponent implements OnInit {
 
   constructor(
     private readonly dialogService: DialogService,
-    private readonly ngZone: NgZone
+    //private readonly ngZone: NgZone,
+    private router : Router
   ) {}
 
   public ngOnInit(): void {
@@ -88,6 +90,10 @@ export class LectorqrComponent implements OnInit {
 
   public async requestPermissions(): Promise<void> {
     await BarcodeScanner.requestPermissions();
+  }
+
+  backToLogin(){
+    this.router.navigate(["/"]);
   }
 
 }

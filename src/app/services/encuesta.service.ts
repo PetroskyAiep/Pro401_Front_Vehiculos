@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
@@ -19,26 +18,25 @@ export class EncuestaService {
     return respuesta;
  }
 
-/*  guardarEncuesta(encuesta : any){
+  getEncuesta(){
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization' : `Bearer ${token}`
+    });
+    const options = { headers: headers };
+    console.log(options);
+    return this.http.get<any>(`${URL}/api/Encuesta`, options);
+  }
 
-  this.http.post(`${URL}/api/Encuesta`, encuesta).subscribe({
-    next : resp => {
-      console.log(resp);
-    },
-    error: err => {
-      console.log(err);
-    }
-});
-} */
-
-guardarEncuesta(encuesta : any){
-  return this.http.post(`${URL}/api/Encuesta`, encuesta);
-}
+  guardarEncuesta(encuesta : any){
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization' : `Bearer ${token}`
+    });
+    const options = { headers: headers };
+    console.log(options);
+    return this.http.post(`${URL}/api/Encuesta`, encuesta, options);
+  }
  
-}
-
-interface Comuna{
-  id: number;
-  nombre: string;
 }
 

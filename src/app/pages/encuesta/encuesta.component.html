@@ -22,9 +22,9 @@
              (ionChange)="handleChange($event)" 
              formControlName="Publico_Privado"
              fill="outline">
-             <ion-select-option value="publico">Publico</ion-select-option>
-             <ion-select-option value="privadoSinCompartir">Privado Sin Compartir</ion-select-option>
-             <ion-select-option value="privadoCompartido">Privado Compartido</ion-select-option>
+             <ion-select-option value="publico" value="1">Publico</ion-select-option>
+             <ion-select-option value="privadoSinCompartir" value="2">Privado Sin Compartir</ion-select-option>
+             <ion-select-option value="privadoCompartido" value="3">Privado Compartido</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-list>
@@ -36,23 +36,33 @@
             <ion-select
 			      aria-label="Medio de Transporte" 
 			      placeholder="Medio de Transporte" 
-            formControlName="MedioTransporte"
+            formControlName="TransporteId"
 			      fill="outline">
-            <ion-select-option *ngFor="let valor of listaTransportes">{{valor}}</ion-select-option>
+            <ion-select-option *ngFor="let valor of listaTransportes" value="{{valor.id}}">{{valor.nombre}}</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-list>
 
         <br>
         <ion-input 
-        label="KM"
+        label="km aproximados de ruta"
         type="number"
         label-placement="floating" 
         fill="outline"
+        formControlName="KmAproximado"
         placeholder="0">
-        formControlName="KM"
         </ion-input>
+        <br>
 
+        <br>
+        <ion-input 
+        label="Tiempo aproximado de viaje (minutos)"
+        type="number"
+        label-placement="floating" 
+        fill="outline"
+        formControlName="TiempoAproximado"
+        placeholder="0">
+        </ion-input>
         <br>
 
         <ion-button type="submit" expand="block">Enviar</ion-button>

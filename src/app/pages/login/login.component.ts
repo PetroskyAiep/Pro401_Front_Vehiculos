@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Form, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { EncuestaService } from '@app/services/encuesta.service';
 import { AlertController } from '@ionic/angular';
 import { AccountService } from 'src/app/services/account.service';
 
@@ -11,10 +12,13 @@ import { AccountService } from 'src/app/services/account.service';
 })
 export class LoginComponent  implements OnInit {
 
+  encuesta : any;
+
   constructor(
     private router : Router, 
     private fb : FormBuilder, 
     private accountService : AccountService,
+    private encuestaService : EncuestaService,
     private alertController : AlertController
     ){ }
 
@@ -44,7 +48,20 @@ export class LoginComponent  implements OnInit {
       next : (resp : any) => {
         console.log(resp);
         localStorage.setItem("token", resp["token"]);
-        this.router.navigate(["/encuesta"]);
+
+        
+        this.encuestaService.getEncuesta().subscribe({
+          next : (resp : any) => {
+            console.log(resp);
+            this.encuesta = resp;
+            console.log(this.encuesta.estadoEncuesta);
+            this.encuesta.estadoEncuesta == 1? this.router.navigate(["/finalizacion"]) : this.router.navigate(["/encuesta"]);
+          },
+          error:  err => {
+            console.log(err);
+            this.router.navigate(["/encuesta"]);
+          }
+        });
       },
       error: async err => {
         console.log(err);
@@ -57,6 +74,7 @@ export class LoginComponent  implements OnInit {
         await alert.present();
       }
     });
-  }
-
+  };
 }
+
+

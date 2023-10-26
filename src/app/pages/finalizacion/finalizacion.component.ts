@@ -17,4 +17,8 @@ export class FinalizacionComponent  implements OnInit {
     this.router.navigate(["/"]);
   }
 
+  toQr(){
+    this.router.navigate(["/lectorqr"]);
+  }
+
 }

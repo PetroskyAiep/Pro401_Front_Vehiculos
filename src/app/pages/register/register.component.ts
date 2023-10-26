@@ -35,7 +35,6 @@ export function validarEdad(dateKey : string) : ValidatorFn{
 export class RegisterComponent  implements OnInit {
 
   comunas : any[] =[{id: 1, nombre: "Santiago"},{id: 2, nombre: "Providencia"},{id: 3, nombre: "Las Condes"}];
-  currentDate = new Date();
   registroDTO : registroDTO = {
     Email : "",
     Password : "",
