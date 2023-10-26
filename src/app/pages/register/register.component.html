@@ -59,6 +59,9 @@
           errorText="Ingresa tu Fecha de Nacimiento"
           placeholder="Ingresa tu Fecha de Nacimiento">
         </ion-input>
+        <div *ngIf="registerForm.errors?.['edadInvalida']">
+          <ion-text color="danger">&nbsp;&nbsp;Edad invalida</ion-text>
+        </div>
 
         <br>
 
@@ -139,7 +142,7 @@
         </ion-input>
 
         <div *ngIf="registerForm.errors?.['passwordMismatch']">
-          <ion-text color="danger">Las contraseñas no coinciden</ion-text>
+          <ion-text color="danger">  Las contraseñas no coinciden</ion-text>
         </div>
 
         <br>

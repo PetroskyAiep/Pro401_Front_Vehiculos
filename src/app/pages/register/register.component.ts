@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { min } from 'rxjs';
 import { AccountService } from 'src/app/services/account.service';
 import { EncuestaService } from 'src/app/services/encuesta.service';
+import { environment } from 'src/environments/environment';
+
+const minEdad = environment.minEdad * environment.yearTimeStampValue;
+const maxEdad = environment.maxEdad * environment.yearTimeStampValue;
 
 export function matchPasswordValidator(passwordKey : string, confirmPasswordKey : string) : ValidatorFn{
   return (control : AbstractControl) : {[key : string] : any} | null => {
@@ -10,6 +15,16 @@ export function matchPasswordValidator(passwordKey : string, confirmPasswordKey 
     const password = control.get(passwordKey)?.value;
     const confirmPassword = control.get(confirmPasswordKey)?.value;
     return password === confirmPassword ? null : {passwordMismatch : true};
+  }
+}
+
+export function validarEdad(dateKey : string) : ValidatorFn{
+  return (control : AbstractControl) : {[key : string] : any} | null => {
+    const fecha = Date.parse(control.get(dateKey)?.value);
+    const currentDate = new Date();
+    const currentDateInt = Date.parse(currentDate.toString());
+    const edad = currentDateInt - fecha;
+    return currentDateInt > fecha && maxEdad > edad ? null : {edadInvalida : true};
   }
 }
 
@@ -44,14 +59,16 @@ export class RegisterComponent  implements OnInit {
     Run : new FormControl('', [Validators.required, Validators.pattern('^[0-9]+-[0-9kK]{1}$')]),
     Nombres : new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]),
     Apellidos : new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]),
-    FechaNacimiento : new FormControl('', [Validators.required/*Validators.min( aui va la fecha minima), Validators.max((Aqui va la fecha maxima))*/]),
+    FechaNacimiento : new FormControl('', [Validators.required]),
     TipoTrabajoId : new FormControl('', [Validators.required, Validators.pattern('^[0-9]*$')]),
     ComunaTrabajoId : new FormControl('', [Validators.required, Validators.pattern('^[0-9]*$')]),
     ComunaResidenciaId : new FormControl('', [Validators.required, Validators.pattern('^[0-9]*$')]),
   },
   {
-    validator : matchPasswordValidator('Password', 'confirmPassword'),
-  })
+    validator : [matchPasswordValidator('Password', 'confirmPassword'), validarEdad('FechaNacimiento')]
+  });
+
+
 
   ngOnInit() {
     this.encuestaService.getComunas().subscribe(response => {
@@ -64,6 +81,9 @@ export class RegisterComponent  implements OnInit {
   }
 
   submitForm(){
+/*     const Edad = Date.parse(this.registerForm.value.FechaNacimiento);
+    const 
+ */
     this.registroDTO.Email = this.registerForm.value.Email;
     this.registroDTO.Password = this.registerForm.value.Password;
     this.registroDTO.Run = this.registerForm.value.Run;
@@ -73,6 +93,9 @@ export class RegisterComponent  implements OnInit {
     this.registroDTO.TipoTrabajoId = Number(this.registerForm.value.TipoTrabajoId);
     this.registroDTO.ComunaTrabajoId = Number(this.registerForm.value.ComunaTrabajoId);
     this.registroDTO.ComunaResidenciaId = Number(this.registerForm.value.ComunaResidenciaId);
+  /*   if(this.FechaNacimiento < minAge){
+      this.registroDTO.ComunaTrabajoId = 0;
+    } */
     this.registroDTO.EstadoRegistroId = 1;
     console.log(this.registroDTO);
     this.accountService.register(this.registroDTO);
@@ -91,12 +114,4 @@ interface registroDTO{
   ComunaTrabajoId : number;
   ComunaResidenciaId : number;
   EstadoRegistroId : number;
-}
-
-interface Encuesta{
-  EstadoEncuesta: number;
-  TiempoAproximado: number;
-  KmAproximado: number;
-  TipoTransporteId: number;
-  UsuarioEmail: string;
 }

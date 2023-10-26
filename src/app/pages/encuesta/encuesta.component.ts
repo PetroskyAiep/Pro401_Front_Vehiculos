@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { EncuestaService } from 'src/app/services/encuesta.service';
@@ -23,10 +23,11 @@ export class EncuestaComponent  implements OnInit {
     ){ }
 
     encuestaForm = this.fb.group({
-      Publico_Privado  : new FormControl(''),
-      MedioTransporte  : new FormControl(''),
-      KM : new FormControl(''),
-    })
+      Publico_Privado  : new FormControl('', [Validators.required]),
+      MedioTransporte  : new FormControl('', [Validators.required]),
+      KM : new FormControl('', [Validators.required, Validators.min(0)]),
+    });
+    
 
   ngOnInit() {}
 
